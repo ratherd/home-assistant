@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 43.0208
-  longitude: -89.36
+  latitude: 43.071710
+  longitude: -89.437207
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 273
   # metric for Metric, imperial for Imperial
@@ -55,13 +55,109 @@ map:
 # Track the sun
 sun:
 
-# Weather prediction
-sensor:
-  - platform: yr
-
 # Text to speech
 tts:
   - platform: google
+
+#### ARLO SETUP ###
+arlo:
+  username: !secret arlo_username
+  password: !secret arlo_password
+
+camera:
+  - platform: arlo
+    ffmpeg_arguments: '-pred 1 -q:v 2'
+
+sensor:
+  - platform: arlo
+    monitored_conditions:
+      - captured_today
+      - last_capture
+      - total_cameras
+      - battery_level
+###
+
+### ECOBEE SETUP ###
+ecobee:
+  api_key: !secret ecobee_api_key
+  hold_temp: false
+###
+
+### UNIFI DEVICE TRACKING ###
+device_tracker:
+  - platform: unifi
+    host: 192.168.1.18
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: false
+###
+
+### WEATHERUNDERGROUNG SETUP ###
+sensor 1:
+  - platform: wunderground
+  api_key: !secret wunderground_api_key
+  monitored_conditions:
+    - alerts
+    - dewpoint_f
+    - dewpoint_string
+    - feelslike_f
+    - feelslikestring
+    - heat_index_f
+    - heat_index_string
+    - observation_time
+    - precip_today_in
+    - precip_today_string
+    - precip_1d_in
+    - precip_1d
+    - pressure_in
+    - pressure_trend
+    - relative_humidity
+    - solarradiation
+    - temperature_string
+    - temp_f
+    - temp_high_record_f
+    - temp_low_record_f
+    - temp_high_avg_f
+    - temp_low_avg_f
+    - temp_high_1d_f
+    - temp_low_1d_f
+    - UV
+    - visibility_mi
+    - weather
+    - weather_1d
+    - weather_1h
+    - wind_degrees
+    - wind_dir
+    - wind_gust_mph
+    - wind_gust_1d_mph
+    - wind_mph
+    - wind_1d_mph
+    - wind_string
+###
+
+### TP-Link Switches ###
+switch:
+  - platform: tplink
+    name: Living Room Lamp
+    host: IP_ADDRESS
+
+
+switch 1:
+  - platform: tplink
+    name: Coffee Pot
+    host: IP_ADDRESS
+
+
+### Chromecasts ###
+media_player:
+  - platform: cast
+    host: ###.###.###.###
+
+media_player 1:
+  - platform: cast
+    host: ###.###.###.###
+
+
 
 group: !include groups.yaml
 automation: !include automations.yaml
