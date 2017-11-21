@@ -1,0 +1,17 @@
+bryans_phone:
+  hide_if_away: false
+  icon:
+  mac: 40:4E:36:83:AC:0D
+  name: Bryan's Phone
+  picture:
+  track: true
+  vendor: HTC Corporation
+
+mallorys_phone:
+  hide_if_away: false
+  icon:
+  mac: 40:4E:36:8B:E9:A8
+  name: Mallory's Phone
+  picture:
+  track: true
+  vendor: HTC Corporation
