@@ -2,8 +2,8 @@ homeassistant:
   # Name of the location where Home Assistant is running
   name: Home
   # Location required to calculate the time the sun rises and sets
-  latitude: 43.0208
-  longitude: -89.36
+  latitude: 43.071710
+  longitude: -89.437207
   # Impacts weather/sunrise data (altitude above sea level in meters)
   elevation: 273
   # metric for Metric, imperial for Imperial
@@ -14,7 +14,7 @@ homeassistant:
   customize: !include customize.yaml
 
 # Show links to resources in log and frontend
-introduction:
+#introduction:
 
 # Enables the frontend
 frontend:
@@ -24,9 +24,11 @@ config:
 
 http:
   # Secrets are defined in the file secrets.yaml
-  # api_password: !secret http_password
+  api_password: !secret http_password
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-  # base_url: example.duckdns.org:8123
+  base_url: hass.basecampterra.org
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
 
 # Checks for available updates
 # Note: This component will send some information about your system to
@@ -38,10 +40,13 @@ updater:
   # include_used_components: true
 
 # Discover some devices automatically
-discovery:
+#discovery:
+
+#Show hassio menu
+hassio:
 
 # Allows you to issue voice commands from the frontend in enabled browsers
-conversation:
+#conversation:
 
 # Enables support for tracking state changes over time
 history:
@@ -50,18 +55,98 @@ history:
 logbook:
 
 # Enables a map showing the location of tracked devices
-map:
+#map:
 
 # Track the sun
 sun:
 
-# Weather prediction
-sensor:
-  - platform: yr
-
 # Text to speech
 tts:
   - platform: google
+
+#### ARLO SETUP ###
+arlo:
+  username: !secret arlo_username
+  password: !secret arlo_password
+
+camera:
+  - platform: arlo
+    ffmpeg_arguments: '-pred 1 -q:v 2'
+
+sensor:
+  - platform: arlo
+    monitored_conditions:
+      - captured_today
+      - last_capture
+      - total_cameras
+      - battery_level
+###
+
+### ECOBEE SETUP ###
+ecobee:
+  api_key: !secret ecobee_api_key
+  hold_temp: false
+###
+
+### UNIFI DEVICE TRACKING ###
+device_tracker:
+  - platform: unifi
+    host: 192.168.1.18
+    username: !secret unifi_username
+    password: !secret unifi_password
+    verify_ssl: false
+    track_new_devices: false
+###
+
+### WEATHERUNDERGROUNG SETUP ###
+sensor 1:
+  - platform: wunderground
+    api_key: !secret wunderground_api_key
+    monitored_conditions:
+      - temp_high_record_c
+      - temp_high_1d_c
+      - temp_c
+      - temp_low_1d_c
+      - temp_low_record_c
+      - precip_1d
+      - precip_1d_mm
+      - wind_kph
+      - wind_1d_kph
+      - alerts
+###
+
+### TP-Link Switches ###
+switch:
+  - platform: tplink
+    name: Living Room Lamp
+    host: 192.168.1.200
+
+switch 1:
+  - platform: tplink
+    name: Coffee Pot
+    host: 192.168.1.201
+
+### Chromecasts ###
+media_player:
+  - platform: cast
+    name: Basement
+    host: 192.168.1.204
+
+media_player 1:
+  - platform: cast
+    name: Attic
+    host: 192.168.1.205
+
+#media_player_2:
+#  - platform: cast
+#    name: Home Mini - Kitchen
+#    host: 192.168.1.203
+
+media_player 3:
+  - platform: samsungtv
+    name: Living Room TV
+    host: 192.168.1.206
+    mac: f8:3f:51:20:01:82
 
 group: !include groups.yaml
 automation: !include automations.yaml

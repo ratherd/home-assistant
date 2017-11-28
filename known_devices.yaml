@@ -1,0 +1,17 @@
+bryans_phone:
+  hide_if_away: false
+  icon:
+  mac: !secret bryans_phone_mac
+  name: Bryan's Phone
+  picture:
+  track: true
+  vendor: HTC Corporation
+
+mallorys_phone:
+  hide_if_away: false
+  icon:
+  mac: !secret mallorys_phone_mac
+  name: Mallory's Phone
+  picture:
+  track: true
+  vendor: HTC Corporation
