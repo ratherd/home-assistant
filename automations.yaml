@@ -1,0 +1,36 @@
+- id: good_morning
+  alias: Good Morning
+  trigger:
+    platform: time
+    at: '6:00'
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.living_room_lamp
+
+- id: coffee_pot_off
+  alias: Coffee Pot Off
+  trigger:
+    platform: time
+    at: '7:15'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.coffee_pot
+
+- id: good_evening
+  alias: Good Evening
+  trigger:
+    platform: sun
+    event: sunset
+    offset: "-00:15:00"
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.living_room_lamp
+
+- id: good_night
+  alias: Good Night
+  trigger:
+    platform: time
+    at: '23:00'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.living_room_lamp

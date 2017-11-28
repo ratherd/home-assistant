@@ -137,10 +137,10 @@ media_player 1:
     name: Attic
     host: 192.168.1.205
 
-media_player_2:
-  - platform: cast
-    name: Home Mini - Kitchen
-    host: 192.168.1.203
+#media_player_2:
+#  - platform: cast
+#    name: Home Mini - Kitchen
+#    host: 192.168.1.203
 
 media_player 3:
   - platform: samsungtv
