@@ -29,6 +29,7 @@ switches:
   entities:
     - switch.coffee_pot
     - switch.living_room_lamp
+    - switch.christmas_tree
 
 people:
   name: People

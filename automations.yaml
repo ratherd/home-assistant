@@ -6,7 +6,6 @@
   action:
     service: homeassistant.turn_on
     entity_id: switch.living_room_lamp
-
 - id: coffee_pot_off
   alias: Coffee Pot Off
   trigger:
@@ -15,17 +14,23 @@
   action:
     service: homeassistant.turn_off
     entity_id: switch.coffee_pot
-
+- id: living_room_lamp_off
+  alias: Living Room Lamp Off
+  trigger:
+  - at: '7:15'
+    platform: time
+  action:
+  - entity_id: switch.living_room_lamp
+    service: homeassistant.turn_off
 - id: good_evening
   alias: Good Evening
   trigger:
     platform: sun
     event: sunset
-    offset: "-00:15:00"
+    offset: -00:15:00
   action:
     service: homeassistant.turn_on
     entity_id: switch.living_room_lamp
-
 - id: good_night
   alias: Good Night
   trigger:
@@ -34,3 +39,20 @@
   action:
     service: homeassistant.turn_off
     entity_id: switch.living_room_lamp
+- id: xmas_on
+  alias: Xmas Tree On
+  trigger:
+    platform: sun
+    event: sunset
+    offset: -00:5:00
+  action:
+    service: homeassistant.turn_on
+    entity_id: switch.christmas_tree
+- id: xmas_off
+  alias: Xmas Tree off
+  trigger:
+    platform: time
+    at: '23:45'
+  action:
+    service: homeassistant.turn_off
+    entity_id: switch.christmas_tree

@@ -101,7 +101,7 @@ ecobee:
 ### UNIFI DEVICE TRACKING ###
 device_tracker:
   - platform: unifi
-    host: 192.168.1.18
+    host: !secret unifi_controllerip
     username: !secret unifi_username
     password: !secret unifi_password
     verify_ssl: false
@@ -136,6 +136,11 @@ switch 1:
     name: Coffee Pot
     host: 192.168.1.201
 
+switch 2:
+  - platform: tplink
+    name: Christmas Tree
+    host: 192.168.1.199
+
 ### Chromecasts ###
 media_player:
   - platform: cast
@@ -151,6 +156,16 @@ media_player 1:
 #  - platform: cast
 #    name: Home Mini - Kitchen
 #    host: 192.168.1.203
+
+#media_player_3:
+#  - platform: cast
+#    name: Home Mini - Living Room
+#    host: 192.168.1.197
+
+#media_player_4:
+#  - platform: cast
+#    name: Home Mini - Bano
+#    host: 192.168.1.198
 
 media_player 3:
   - platform: samsungtv
